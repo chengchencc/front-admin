@@ -239,7 +239,14 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
     ),
   );
 }
-export const defHttp = createAxios();
+export const httpClient = createAxios();
+
+// 未授权请求
+export const unAuthHttp = createAxios({
+  requestOptions: {
+    withToken: false,
+  },
+});
 
 // other api url
 // export const otherHttp = createAxios({
