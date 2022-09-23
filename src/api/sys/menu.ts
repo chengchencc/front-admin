@@ -2,7 +2,7 @@ import { httpClient } from '/@/utils/http/axios';
 import { getMenuListResultModel } from './model/menuModel';
 
 enum Api {
-  GetMenuList = '/getMenuList',
+  GetMenuList = '/basic-api/getMenuList',
 }
 
 /**

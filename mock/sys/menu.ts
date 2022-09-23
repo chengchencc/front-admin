@@ -25,6 +25,14 @@ const dashboardRoute = {
         currentActiveMenu: '/dashboard',
         icon: 'bx:bx-home',
       },
+      tag: {
+        // 为true则显示小圆点
+        dot: true,
+        // 内容
+        content: '11',
+        // 类型
+        type: 'error',
+      },
     },
     {
       path: 'workbench',
@@ -141,6 +149,14 @@ const sysRoute = {
   name: 'System',
   component: 'LAYOUT',
   redirect: '/system/account',
+  tag: {
+    // 为true则显示小圆点
+    dot: true,
+    // 内容
+    content: '11',
+    // 类型
+    type: 'error',
+  },
   meta: {
     icon: 'ion:settings-outline',
     title: 'routes.demo.system.moduleName',
@@ -149,6 +165,14 @@ const sysRoute = {
     {
       path: 'account',
       name: 'AccountManagement',
+      tag: {
+        // 为true则显示小圆点
+        dot: true,
+        // 内容
+        content: '11',
+        // 类型
+        type: 'error',
+      },
       meta: {
         title: 'routes.demo.system.account',
         ignoreKeepAlive: true,

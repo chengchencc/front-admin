@@ -9,6 +9,8 @@ import { wrapperEnv } from './build/utils';
 import { createVitePlugins } from './build/vite/plugin';
 import { OUTPUT_DIR } from './build/constant';
 
+import { proxyConfig } from './proxy.config';
+
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
@@ -57,7 +59,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       host: true,
       port: VITE_PORT,
       // Load proxy configuration from .env
-      proxy: createProxy(VITE_PROXY),
+      // proxy: createProxy(VITE_PROXY),
+      proxy: proxyConfig,
     },
     build: {
       target: 'es2015',

@@ -1,7 +1,7 @@
 import { httpClient } from '/@/utils/http/axios';
 
 enum Api {
-  TREE_OPTIONS_LIST = '/tree/getDemoOptions',
+  TREE_OPTIONS_LIST = '/basic-api/tree/getDemoOptions',
 }
 
 /**

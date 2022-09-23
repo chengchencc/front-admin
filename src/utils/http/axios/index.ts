@@ -143,6 +143,8 @@ const transform: AxiosTransform = {
       (config as Recordable).headers.Authorization = options.authenticationScheme
         ? `${options.authenticationScheme} ${token}`
         : token;
+    } else if (options.authenticationScheme == 'Basic') {
+      (config as Recordable).headers.Authorization = `Basic ${token}`;
     }
     return config;
   },
@@ -239,7 +241,13 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
     ),
   );
 }
-export const httpClient = createAxios();
+export const httpClient = createAxios({
+  authenticationScheme: 'Bearer',
+  requestOptions: {
+    apiUrl: '',
+    urlPrefix: '',
+  },
+});
 
 // 未授权请求
 export const unAuthHttp = createAxios({

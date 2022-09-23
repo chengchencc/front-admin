@@ -119,8 +119,8 @@
   const rememberMe = ref(false);
 
   const formData = reactive({
-    account: 'vben',
-    password: '123456',
+    account: 'admin',
+    password: 'admin',
   });
 
   const { validForm } = useFormValid(formRef);
@@ -137,6 +137,7 @@
       const userInfo = await userStore.login({
         password: data.password,
         username: data.account,
+        grant_type: 'password',
         mode: 'none', //不要默认的错误提示
       });
       if (userInfo) {
@@ -146,10 +147,15 @@
           duration: 3,
         });
       }
-    } catch (error) {
+    } catch (error: any) {
+      let errMessage = (error as unknown as Error).message;
+      const { code, message } = error || {};
+      if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
+        errMessage = t('sys.api.apiTimeoutMessage');
+      }
       createErrorModal({
         title: t('sys.api.errorTip'),
-        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
+        content: errMessage || t('sys.api.networkExceptionMsg'),
         getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
       });
     } finally {

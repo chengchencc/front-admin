@@ -2,7 +2,7 @@ import { httpClient } from '/@/utils/http/axios';
 
 enum Api {
   // The address does not exist
-  Error = '/error',
+  Error = '/basic-api/error',
 }
 
 /**

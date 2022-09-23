@@ -91,8 +91,11 @@ export const useUserStore = defineStore({
       try {
         const { goHome = true, mode, ...loginParams } = params;
         const data = await loginApi(loginParams, mode);
-        const { token } = data;
+        // 登录成功
+        console.log(data);
 
+        // const { token } = data;
+        const token = data.access_token;
         // save token
         this.setToken(token);
         return this.afterLoginAction(goHome);
@@ -127,7 +130,7 @@ export const useUserStore = defineStore({
       const userInfo = await getUserInfo();
       const { roles = [] } = userInfo;
       if (isArray(roles)) {
-        const roleList = roles.map((item) => item.value) as RoleEnum[];
+        const roleList = roles.map((item) => item.code) as RoleEnum[];
         this.setRoleList(roleList);
       } else {
         userInfo.roles = [];

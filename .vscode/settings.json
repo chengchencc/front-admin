@@ -95,7 +95,8 @@
   "[vue]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": false
-    }
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "i18n-ally.localesPaths": ["src/locales/lang"],
   "i18n-ally.keystyle": "nested",
@@ -139,5 +140,9 @@
     "tailwindcss",
     "sider",
     "pnpm"
-  ]
+  ],
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "dotenv.enableAutocloaking": false
 }
