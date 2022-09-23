@@ -1,7 +1,7 @@
 export const proxyConfig = {
   '/api': {
-    target: 'http://localhost:9900',
-    // pathRewrite: { '^/api-cm': 'app-creditmid-service' },
+    target: 'http://localhost:8880',
+    rewrite: (path) => path.replace(/^\/api/, ''),
     ws: false,
     changeOrigin: true,
   },
