@@ -9,7 +9,7 @@ type ProxyList = ProxyItem[];
 
 type ProxyTargetList = Record<string, ProxyOptions>;
 
-const httpsRE = /^https:\/\//;
+// const httpsRE = /^https:\/\//;
 
 /**
  * Generate proxy
@@ -18,7 +18,7 @@ const httpsRE = /^https:\/\//;
 export function createProxy(list: ProxyList = []) {
   const ret: ProxyTargetList = {};
   for (const [prefix, target] of list) {
-    const isHttps = httpsRE.test(target);
+    // const isHttps = httpsRE.test(target);
 
     // https://github.com/http-party/node-http-proxy#options
     ret[prefix] = {

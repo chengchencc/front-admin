@@ -137,7 +137,8 @@
       const userInfo = await userStore.login({
         password: data.password,
         username: data.account,
-        grant_type: 'password',
+        // eslint-disable-next-line prettier/prettier
+        'grant_type': 'password',
         mode: 'none', //不要默认的错误提示
       });
       if (userInfo) {
