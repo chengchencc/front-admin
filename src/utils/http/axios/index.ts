@@ -244,7 +244,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
 export const httpClient = createAxios({
   authenticationScheme: 'Bearer',
   requestOptions: {
-    apiUrl: '',
+    // apiUrl: '',
     // urlPrefix: '',
   },
 });

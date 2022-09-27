@@ -1,3 +1,4 @@
+import { ApiUrlprefix } from 'mock/config';
 import { MockMethod } from 'vite-plugin-mock';
 import { resultSuccess } from '../_util';
 
@@ -16,7 +17,7 @@ const demoList = (keyword, count = 20) => {
 
 export default [
   {
-    url: '/basic-api/select/getDemoOptions',
+    url: ApiUrlprefix + '/basic-api/select/getDemoOptions',
     timeout: 1000,
     method: 'get',
     response: ({ query }) => {

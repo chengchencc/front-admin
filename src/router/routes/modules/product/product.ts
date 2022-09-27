@@ -23,6 +23,14 @@ const chengch: AppRouteModule = {
       },
     },
     {
+      path: 'tag',
+      name: 'ProductTag',
+      component: () => import('/@/views/modules/tag/index.vue'),
+      meta: {
+        title: '分类管理',
+      },
+    },
+    {
       path: 'dict',
       name: 'dict',
       component: () => import('/@/views/modules/dict/index.vue'),

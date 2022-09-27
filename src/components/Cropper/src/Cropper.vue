@@ -102,6 +102,7 @@
         if (!imgEl) {
           return;
         }
+        console.log(props.options);
         cropper.value = new Cropper(imgEl, {
           ...defaultOptions,
           ready: () => {

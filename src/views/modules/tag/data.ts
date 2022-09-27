@@ -1,33 +1,43 @@
+import { deleteTag, getTagList, insertTag, updateTag } from '/@/api/product/product';
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { auditColumns } from '/@/domain/AuditColumn';
+import { httpClient } from '/@/utils/http/axios';
+
+// export const api = {
+//   page: getTagList,
+//   all: () => httpClient.get<any>({ url: `/tag/detail` }),
+//   insert: insertTag,
+//   update: updateTag,
+//   del: deleteTag,
+// };
+
+export const api = {
+  all: () => httpClient.get<any>({ url: `/tag/details` }),
+  page: (params: any) => httpClient.get<any>({ url: `/tag/page`, params }),
+  insert: (data: any) => httpClient.post<any>({ url: `/tag`, data }),
+  update: (data: any) => httpClient.put<any>({ url: `/tag`, data }),
+  del: (id: any) => httpClient.delete<any>({ url: `/tag/${id}` }),
+};
+export const listName = '商品类别';
 
 export const columns: BasicColumn[] = [
-  {
-    title: '类型',
-    dataIndex: 'type',
-    width: 120,
-  },
   {
     title: '名称',
     dataIndex: 'name',
     width: 120,
   },
   {
-    title: '字典值',
-    dataIndex: 'value',
-    width: 120,
-  },
-  {
-    title: '序号',
+    title: '排序号',
     dataIndex: 'sortNo',
     width: 120,
   },
+  ...auditColumns,
+
   {
     title: '备注',
     dataIndex: 'description',
   },
-  ...auditColumns,
 ];
 
 export const searchFormSchema: FormSchema[] = [
@@ -47,31 +57,15 @@ export const searchFormSchema: FormSchema[] = [
 
 export const formSchema: FormSchema[] = [
   {
-    field: 'type',
-    label: '类型',
-    component: 'Input',
-    helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
-    required: true,
-  },
-  {
     field: 'name',
     label: '名称',
     component: 'Input',
-    helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
-    required: true,
-  },
-  {
-    field: 'value',
-    label: '字典值',
-    component: 'Input',
-    helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
     required: true,
   },
   {
     field: 'sortNo',
     label: '序号',
     component: 'InputNumber',
-    helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
     required: true,
   },
   {

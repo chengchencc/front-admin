@@ -1,3 +1,4 @@
+import { ApiUrlprefix } from 'mock/config';
 import { MockMethod } from 'vite-plugin-mock';
 import { resultError, resultPageSuccess, resultSuccess } from '../_util';
 
@@ -136,7 +137,7 @@ const menuList = (() => {
 
 export default [
   {
-    url: '/basic-api/system/getAccountList',
+    url: ApiUrlprefix + '/basic-api/system/getAccountList',
     timeout: 100,
     method: 'get',
     response: ({ query }) => {
@@ -145,7 +146,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/system/getRoleListByPage',
+    url: ApiUrlprefix + '/basic-api/system/getRoleListByPage',
     timeout: 100,
     method: 'get',
     response: ({ query }) => {
@@ -154,7 +155,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/system/setRoleStatus',
+    url: ApiUrlprefix + '/basic-api/system/setRoleStatus',
     timeout: 500,
     method: 'post',
     response: ({ query }) => {
@@ -163,7 +164,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/system/getAllRoleList',
+    url: ApiUrlprefix + '/basic-api/system/getAllRoleList',
     timeout: 100,
     method: 'get',
     response: () => {
@@ -171,7 +172,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/system/getDeptList',
+    url: ApiUrlprefix + '/basic-api/system/getDeptList',
     timeout: 100,
     method: 'get',
     response: () => {
@@ -179,7 +180,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/system/getMenuList',
+    url: ApiUrlprefix + '/basic-api/system/getMenuList',
     timeout: 100,
     method: 'get',
     response: () => {
@@ -187,7 +188,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/system/accountExist',
+    url: ApiUrlprefix + '/basic-api/system/accountExist',
     timeout: 500,
     method: 'post',
     response: ({ body }) => {

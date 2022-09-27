@@ -1,6 +1,7 @@
 import { resultSuccess, resultError, getRequestToken, requestParams } from '../_util';
 import { MockMethod } from 'vite-plugin-mock';
 import { createFakeUserList } from './user';
+import { ApiUrlprefix } from 'mock/config';
 
 // single
 const dashboardRoute = {
@@ -261,7 +262,7 @@ const linkRoute = {
 
 export default [
   {
-    url: '/basic-api/getMenuList',
+    url: ApiUrlprefix + '/basic-api/getMenuList',
     timeout: 1000,
     method: 'get',
     response: (request: requestParams) => {

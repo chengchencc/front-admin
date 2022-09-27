@@ -1,3 +1,4 @@
+import { ApiUrlprefix } from 'mock/config';
 import { MockMethod } from 'vite-plugin-mock';
 import { resultError, resultSuccess, getRequestToken, requestParams } from '../_util';
 
@@ -46,7 +47,7 @@ const fakeCodeList: any = {
 export default [
   // mock user login
   {
-    url: '/basic-api/login',
+    url: ApiUrlprefix + '/basic-api/login',
     timeout: 200,
     method: 'post',
     response: ({ body }) => {
@@ -69,7 +70,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/getUserInfo',
+    url: ApiUrlprefix + '/basic-api/getUserInfo',
     method: 'get',
     response: (request: requestParams) => {
       const token = getRequestToken(request);
@@ -82,7 +83,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/getPermCode',
+    url: ApiUrlprefix + '/basic-api/getPermCode',
     timeout: 200,
     method: 'get',
     response: (request: requestParams) => {
@@ -98,7 +99,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/logout',
+    url: ApiUrlprefix + '/basic-api/logout',
     timeout: 200,
     method: 'get',
     response: (request: requestParams) => {

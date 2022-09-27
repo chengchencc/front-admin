@@ -5,23 +5,27 @@
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">新增商品</a-button>
       </template>
+      preview
+      <template #preview="{ text }">
+        <img :src="text" />
+      </template>
       <template #action="{ record }">
         <TableAction
           :actions="[
             {
               icon: 'clarity:info-standard-line',
-              tooltip: '查看用户详情',
+              tooltip: '查看',
               onClick: handleView.bind(null, record),
             },
             {
               icon: 'clarity:note-edit-line',
-              tooltip: '编辑用户资料',
+              tooltip: '编辑',
               onClick: handleEdit.bind(null, record),
             },
             {
               icon: 'ant-design:delete-outlined',
               color: 'error',
-              tooltip: '删除此账号',
+              tooltip: '删除',
               popConfirm: {
                 title: '是否确认删除',
                 confirm: handleDelete.bind(null, record),
@@ -31,7 +35,7 @@
         />
       </template>
     </BasicTable>
-    <AccountModal @register="registerModal" @success="handleSuccess" />
+    <EditModal @register="registerModal" @success="handleSuccess" :width="'70%'" />
   </PageWrapper>
 </template>
 <script lang="ts">
@@ -41,16 +45,23 @@
   import { PageWrapper } from '/@/components/Page';
 
   import { useModal } from '/@/components/Modal';
-  import AccountModal from './AccountModal.vue';
+  import EditModal from './edit-modal.vue';
 
-  import { columns, searchFormSchema } from './account.data';
+  import { columns, searchFormSchema } from './data';
   import { useGo } from '/@/hooks/web/usePage';
-  import { getProductList } from '/@/api/product/product';
+  import { deleteProduct, getProductList } from '/@/api/product/product';
+
+  import { useComponentRegister } from '/@/components/Form/index';
+
+  import { Tinymce } from '/@/components/Tinymce/index';
 
   export default defineComponent({
     name: 'AccountManagement',
-    components: { BasicTable, PageWrapper, AccountModal, TableAction },
+    components: { BasicTable, PageWrapper, EditModal: EditModal, TableAction },
     setup() {
+      // 注册
+      useComponentRegister('Tinymce', Tinymce);
+
       const go = useGo();
       const [registerModal, { openModal }] = useModal();
       const searchInfo = reactive<Recordable>({});
@@ -93,19 +104,24 @@
         });
       }
 
-      function handleDelete(record: Recordable) {
-        console.log(record);
+      async function handleDelete(record: Recordable) {
+        console.log('delete product :: ', record);
+        await deleteProduct(record.id);
+        reload();
       }
 
-      function handleSuccess({ isUpdate, values }) {
-        if (isUpdate) {
-          // 演示不刷新表格直接更新内部数据。
-          // 注意：updateTableDataRecord要求表格的rowKey属性为string并且存在于每一行的record的keys中
-          const result = updateTableDataRecord(values.id, values);
-          console.log(result);
-        } else {
-          reload();
-        }
+      // function handleSuccess({ isUpdate, values }) {
+      function handleSuccess() {
+        reload();
+
+        // if (isUpdate) {
+        //   // 演示不刷新表格直接更新内部数据。
+        //   // 注意：updateTableDataRecord要求表格的rowKey属性为string并且存在于每一行的record的keys中
+        //   const result = updateTableDataRecord(values.id, values);
+        //   console.log(result);
+        // } else {
+        //   reload();
+        // }
       }
 
       function handleSelect(deptId = '') {

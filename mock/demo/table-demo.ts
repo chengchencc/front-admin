@@ -1,6 +1,7 @@
 import { MockMethod } from 'vite-plugin-mock';
 import { Random } from 'mockjs';
 import { resultPageSuccess } from '../_util';
+import { ApiUrlprefix } from 'mock/config';
 
 function getRandomPics(count = 10): string[] {
   const arr: string[] = [];
@@ -41,7 +42,7 @@ const demoList = (() => {
 
 export default [
   {
-    url: '/basic-api/table/getDemoList',
+    url: ApiUrlprefix + '/basic-api/table/getDemoList',
     timeout: 100,
     method: 'get',
     response: ({ query }) => {

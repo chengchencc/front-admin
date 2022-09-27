@@ -7,25 +7,25 @@
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { accountFormSchema } from './account.data';
-  import { getDeptList } from '/@/api/demo/system';
+  import { formSchema,api } from './data';
 
   export default defineComponent({
-    name: 'AccountModal',
+    name: 'EditModal',
     components: { BasicModal, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const rowId = ref('');
 
-      const [registerForm, { setFieldsValue, updateSchema, resetFields, validate }] = useForm({
-        labelWidth: 100,
-        schemas: accountFormSchema,
-        showActionButtonGroup: false,
-        actionColOptions: {
-          span: 23,
-        },
-      });
+      const [registerForm, { setFieldsValue, /* updateSchema,  */ resetFields, validate }] =
+        useForm({
+          labelWidth: 100,
+          schemas: formSchema,
+          showActionButtonGroup: false,
+          actionColOptions: {
+            span: 23,
+          },
+        });
 
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields();
@@ -39,25 +39,32 @@
           });
         }
 
-        const treeData = await getDeptList();
-        updateSchema([
-          {
-            field: 'pwd',
-            show: !unref(isUpdate),
-          },
-          {
-            field: 'dept',
-            componentProps: { treeData },
-          },
-        ]);
+        // const treeData = await getDeptList();
+        // updateSchema([
+        //   {
+        //     field: 'pwd',
+        //     show: !unref(isUpdate),
+        //   },
+        //   {
+        //     field: 'dept',
+        //     componentProps: { treeData },
+        //   },
+        // ]);
       });
 
-      const getTitle = computed(() => (!unref(isUpdate) ? '新增账号' : '编辑账号'));
+      const getTitle = computed(() => (!unref(isUpdate) ? '新增字典项' : '编辑字典项'));
 
       async function handleSubmit() {
         try {
-          const values = await validate();
+          let values = await validate();
           setModalProps({ confirmLoading: true });
+
+          if (isUpdate.value) {
+            values = await api.update(values);
+          } else {
+            values = await api.insert(values);
+          }
+
           // TODO custom api
           console.log(values);
           closeModal();

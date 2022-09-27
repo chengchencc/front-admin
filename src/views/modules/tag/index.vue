@@ -3,7 +3,7 @@
     <!-- <DeptTree class="w-1/4 xl:w-1/5" @select="handleSelect" /> -->
     <BasicTable @register="registerTable" class="" :searchInfo="searchInfo">
       <template #toolbar>
-        <!-- <a-button type="primary" @click="handleCreate">新增字典</a-button> -->
+        <a-button type="primary" @click="handleCreate">新增分类</a-button>
       </template>
       <template #action="{ record }">
         <TableAction
@@ -18,15 +18,15 @@
               tooltip: '编辑',
               onClick: handleEdit.bind(null, record),
             },
-            // {
-            //   icon: 'ant-design:delete-outlined',
-            //   color: 'error',
-            //   tooltip: '删除',
-            //   popConfirm: {
-            //     title: '是否确认删除',
-            //     confirm: handleDelete.bind(null, record),
-            //   },
-            // },
+            {
+              icon: 'ant-design:delete-outlined',
+              color: 'error',
+              tooltip: '删除',
+              popConfirm: {
+                title: '是否确认删除',
+                confirm: handleDelete.bind(null, record),
+              },
+            },
           ]"
         />
       </template>
@@ -43,9 +43,8 @@
   import { useModal } from '/@/components/Modal';
   import EditModal from './edit-modal.vue';
 
-  import { columns, listName, searchFormSchema } from './data';
+  import { columns, listName, searchFormSchema, api } from './data';
   import { useGo } from '/@/hooks/web/usePage';
-  import { getFileList } from '/@/api/file';
 
   export default defineComponent({
     name: 'DictionaryManagement',
@@ -55,8 +54,8 @@
       const [registerModal, { openModal }] = useModal();
       const searchInfo = reactive<Recordable>({});
       const [registerTable, { reload, updateTableDataRecord }] = useTable({
-        title: listName,
-        api: getFileList,
+        title: listName || '列表',
+        api: api.page,
         rowKey: 'id',
         columns,
         formConfig: {
@@ -93,8 +92,9 @@
         });
       }
 
-      function handleDelete(record: Recordable) {
+      async function handleDelete(record: Recordable) {
         console.log(record);
+        await api.del(record.id);
       }
 
       function handleSuccess({ isUpdate, values }) {

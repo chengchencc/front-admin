@@ -39,6 +39,7 @@
       let uploading = false;
 
       const { uploadUrl } = useGlobSetting();
+      console.log(uploadUrl);
       const { t } = useI18n();
       const { prefixCls } = useDesign('tinymce-img-upload');
 

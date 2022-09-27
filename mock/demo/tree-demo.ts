@@ -1,3 +1,4 @@
+import { ApiUrlprefix } from 'mock/config';
 import { MockMethod } from 'vite-plugin-mock';
 import { resultSuccess } from '../_util';
 
@@ -26,7 +27,7 @@ const demoTreeList = (keyword) => {
 
 export default [
   {
-    url: '/basic-api/tree/getDemoOptions',
+    url: ApiUrlprefix + '/basic-api/tree/getDemoOptions',
     timeout: 1000,
     method: 'get',
     response: ({ query }) => {

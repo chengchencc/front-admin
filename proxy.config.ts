@@ -5,6 +5,12 @@ export const proxyConfig = {
     ws: false,
     changeOrigin: true,
   },
+  '/file': {
+    target: 'http://localhost:8880',
+    // rewrite: (path) => path.replace(/^\/api/, ''),
+    ws: false,
+    changeOrigin: true,
+  },
   // '/api-grt': {
   //   target: 'http://127.0.0.1:8080',
   //   pathRewrite: { '^/api-grt': '' },

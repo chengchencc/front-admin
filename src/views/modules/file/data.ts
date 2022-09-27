@@ -10,6 +10,8 @@ const booleanRender = ({ text }) => {
   return h(Tag, { color: color }, () => value);
 };
 
+export const listName = '文件列表';
+
 export const columns: BasicColumn[] = [
   {
     title: '原始文件名',
@@ -33,7 +35,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '创建时间',
-    dataIndex: 'createTime',
+    dataIndex: 'creationTime',
     width: 180,
   },
   {
@@ -80,6 +82,11 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
     required: true,
+  },
+  {
+    field: 'file',
+    label: '文件',
+    component: 'Upload',
   },
   {
     field: 'sortNo',

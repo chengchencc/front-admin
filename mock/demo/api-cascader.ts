@@ -1,3 +1,4 @@
+import { ApiUrlprefix } from 'mock/config';
 import { MockMethod } from 'vite-plugin-mock';
 import { resultSuccess } from '../_util';
 
@@ -311,7 +312,7 @@ const areaList: any[] = [
 ];
 export default [
   {
-    url: '/basic-api/cascader/getAreaRecord',
+    url: ApiUrlprefix + '/basic-api/cascader/getAreaRecord',
     timeout: 1000,
     method: 'post',
     response: ({ body }) => {
