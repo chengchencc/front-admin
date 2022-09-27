@@ -1,14 +1,19 @@
 import { api as tagApi } from '../tag/data';
 import { uploadApi } from '/@/api/file';
-import { getDictByType } from '/@/api/product/product';
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { auditColumns } from '/@/domain/AuditColumn';
 import { h } from 'vue';
-import { CropperAvatar, CropperSquare } from '/@/components/Cropper';
+import { CropperSquare } from '/@/components/Cropper';
 // import { uploadApi } from '/@/api/sys/upload';
 
 export const columns: BasicColumn[] = [
+  {
+    title: '封面',
+    dataIndex: 'coverUrl',
+    width: 120,
+    slots: { customRender: 'preview' },
+  },
   {
     title: '款号',
     dataIndex: 'code',
@@ -21,8 +26,9 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '类型',
-    dataIndex: 'tags',
+    dataIndex: 'tagNames',
     width: 120,
+    customRender: ({ text }) => text.join('，'),
   },
   {
     title: '颜色',
@@ -34,12 +40,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'price',
     width: 200,
   },
-  {
-    title: '预览图',
-    dataIndex: 'coverUrl',
-    width: 160,
-    slots: { customRender: 'preview' },
-  },
+
   // {
   //   title: '备注',
   //   dataIndex: 'remark',

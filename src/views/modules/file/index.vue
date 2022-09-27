@@ -5,19 +5,23 @@
       <template #toolbar>
         <!-- <a-button type="primary" @click="handleCreate">新增字典</a-button> -->
       </template>
+      <template #preview="{ text, record }">
+        <img :src="text" v-if="record.isImg" />
+        <img :src="'/src/assets/images/logo.png'" v-else />
+      </template>
       <template #action="{ record }">
         <TableAction
           :actions="[
-            {
-              icon: 'clarity:info-standard-line',
-              tooltip: '查看',
-              onClick: handleView.bind(null, record),
-            },
-            {
-              icon: 'clarity:note-edit-line',
-              tooltip: '编辑',
-              onClick: handleEdit.bind(null, record),
-            },
+            // {
+            //   icon: 'clarity:info-standard-line',
+            //   tooltip: '查看',
+            //   onClick: handleView.bind(null, record),
+            // },
+            // {
+            //   icon: 'clarity:note-edit-line',
+            //   tooltip: '编辑',
+            //   onClick: handleEdit.bind(null, record),
+            // },
             // {
             //   icon: 'ant-design:delete-outlined',
             //   color: 'error',
@@ -64,19 +68,19 @@
           schemas: searchFormSchema,
           autoSubmitOnEnter: true,
         },
-        useSearchForm: true,
+        useSearchForm: false,
         showTableSetting: true,
         bordered: true,
         handleSearchInfoFn(info) {
           console.log('handleSearchInfoFn', info);
           return info;
         },
-        actionColumn: {
-          width: 120,
-          title: '操作',
-          dataIndex: 'action',
-          slots: { customRender: 'action' },
-        },
+        // actionColumn: {
+        //   width: 120,
+        //   title: '操作',
+        //   dataIndex: 'action',
+        //   slots: { customRender: 'action' },
+        // },
       });
 
       function handleCreate() {

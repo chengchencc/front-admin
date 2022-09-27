@@ -12,11 +12,11 @@
       <template #action="{ record }">
         <TableAction
           :actions="[
-            {
-              icon: 'clarity:info-standard-line',
-              tooltip: '查看',
-              onClick: handleView.bind(null, record),
-            },
+            // {
+            //   icon: 'clarity:info-standard-line',
+            //   tooltip: '查看',
+            //   onClick: handleView.bind(null, record),
+            // },
             {
               icon: 'clarity:note-edit-line',
               tooltip: '编辑',

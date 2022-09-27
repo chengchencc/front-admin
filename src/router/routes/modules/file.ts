@@ -8,7 +8,7 @@ const fileRouter: AppRouteModule = {
   redirect: '/file-center/index',
   meta: {
     hideChildrenInMenu: true,
-    icon: 'simple-icons:about-dot-me',
+    icon: 'simple-icons:files',
     title: '文件中心',
     orderNo: 12,
   },

@@ -10,7 +10,7 @@ const chengch: AppRouteModule = {
   meta: {
     orderNo: 11,
     icon: 'ion:layers-outline',
-    title: '产品管理',
+    title: '商品中心',
   },
 
   children: [

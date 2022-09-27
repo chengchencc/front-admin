@@ -61,17 +61,16 @@
         try {
           let values = await validate();
 
-          console.log(values);
-
           setModalProps({ confirmLoading: true });
           // TODO: custom api
 
           const requestData = { ...recordData, ...values };
+          console.log(requestData);
 
           if (isUpdate.value) {
             values = await updateProduct(requestData);
           } else {
-            values = await insertProduct(recordData);
+            values = await insertProduct(requestData);
           }
 
           console.log(values);

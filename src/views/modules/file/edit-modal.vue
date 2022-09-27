@@ -8,7 +8,7 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from './data';
-import { insertDict, updateDict } from '/@/api/product/product';
+  import { insertDict, updateDict } from '/@/api/product/product';
 
   export default defineComponent({
     name: 'EditModal',

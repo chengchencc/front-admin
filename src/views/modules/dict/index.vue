@@ -9,11 +9,6 @@
         <TableAction
           :actions="[
             {
-              icon: 'clarity:info-standard-line',
-              tooltip: '查看',
-              onClick: handleView.bind(null, record),
-            },
-            {
               icon: 'clarity:note-edit-line',
               tooltip: '编辑',
               onClick: handleEdit.bind(null, record),
@@ -45,7 +40,7 @@
 
   import { columns, searchFormSchema } from './data';
   import { useGo } from '/@/hooks/web/usePage';
-  import { getDictList } from '/@/api/product/product';
+  import { deleteDict, getDictList } from '/@/api/product/product';
 
   export default defineComponent({
     name: 'DictionaryManagement',
@@ -93,8 +88,11 @@
         });
       }
 
-      function handleDelete(record: Recordable) {
+      async function handleDelete(record: Recordable) {
         console.log(record);
+        console.log('delete dict :: ', record);
+        await deleteDict(record.id);
+        reload();
       }
 
       function handleSuccess({ isUpdate, values }) {
