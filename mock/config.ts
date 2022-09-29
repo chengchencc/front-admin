@@ -1,1 +1,1 @@
-export const ApiUrlprefix = '/api';
+export const ApiUrlprefix = '/api-admin';

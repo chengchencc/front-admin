@@ -1,4 +1,4 @@
-import { ApiUrlprefix } from 'mock/config';
+import { ApiUrlprefix } from '../config';
 import { MockMethod } from 'vite-plugin-mock';
 import { resultError, resultSuccess, getRequestToken, requestParams } from '../_util';
 

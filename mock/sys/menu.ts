@@ -1,7 +1,7 @@
 import { resultSuccess, resultError, getRequestToken, requestParams } from '../_util';
 import { MockMethod } from 'vite-plugin-mock';
 import { createFakeUserList } from './user';
-import { ApiUrlprefix } from 'mock/config';
+import { ApiUrlprefix } from '../config';
 
 // single
 const dashboardRoute = {
