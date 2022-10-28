@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
     branches:
-      - f_prototype
+      - main
 
 jobs:
   # push-to-ftp:

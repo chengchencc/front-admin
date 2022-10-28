@@ -139,5 +139,9 @@
     "tailwindcss",
     "sider",
     "pnpm"
-  ]
+  ],
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "dotenv.enableAutocloaking": false
 }
