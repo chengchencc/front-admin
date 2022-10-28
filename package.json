@@ -8,6 +8,7 @@
   },
   "scripts": {
     "bootstrap": "pnpm install",
+    "start": "vite",
     "serve": "npm run dev",
     "dev": "vite",
     "build": "cross-env NODE_ENV=production vite build && esno ./build/script/postBuild.ts",
