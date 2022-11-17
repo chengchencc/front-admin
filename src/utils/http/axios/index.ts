@@ -239,7 +239,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
     ),
   );
 }
-export const defHttp = createAxios();
+export const httpClient = createAxios();
 
 // other api url
 // export const otherHttp = createAxios({

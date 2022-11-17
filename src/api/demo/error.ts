@@ -1,4 +1,4 @@
-import { defHttp } from '/@/utils/http/axios';
+import { httpClient } from '/@/utils/http/axios';
 
 enum Api {
   // The address does not exist
@@ -9,4 +9,4 @@ enum Api {
  * @description: Trigger ajax error
  */
 
-export const fireErrorApi = () => defHttp.get({ url: Api.Error });
+export const fireErrorApi = () => httpClient.get({ url: Api.Error });
