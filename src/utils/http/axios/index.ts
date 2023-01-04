@@ -53,7 +53,8 @@ const transform: AxiosTransform = {
     // 这里逻辑可以根据项目进行修改
     const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
     if (hasSuccess) {
-      return result;
+      return data;
+      // return result;
     }
 
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
