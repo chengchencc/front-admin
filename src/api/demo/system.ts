@@ -10,7 +10,7 @@ import {
   RolePageListGetResultModel,
   RoleListGetResultModel,
 } from './model/systemModel';
-import { httpClient } from '/@/utils/http/axios';
+import { httpClientWithSolvedResponse } from '/@/utils/http/axios';
 
 enum Api {
   AccountList = '/basic-api/system/getAccountList',
@@ -23,25 +23,28 @@ enum Api {
 }
 
 export const getAccountList = (params: AccountParams) =>
-  httpClient.get<AccountListGetResultModel>(
+  httpClientWithSolvedResponse.get<AccountListGetResultModel>(
     { url: Api.AccountList, params },
     { isTransformResponse: true },
   );
 
 export const getDeptList = (params?: DeptListItem) =>
-  httpClient.get<DeptListGetResultModel>({ url: Api.DeptList, params });
+  httpClientWithSolvedResponse.get<DeptListGetResultModel>({ url: Api.DeptList, params });
 
 export const getMenuList = (params?: MenuParams) =>
-  httpClient.get<MenuListGetResultModel>({ url: Api.MenuList, params });
+  httpClientWithSolvedResponse.get<MenuListGetResultModel>({ url: Api.MenuList, params });
 
 export const getRoleListByPage = (params?: RolePageParams) =>
-  httpClient.get<RolePageListGetResultModel>({ url: Api.RolePageList, params });
+  httpClientWithSolvedResponse.get<RolePageListGetResultModel>({ url: Api.RolePageList, params });
 
 export const getAllRoleList = (params?: RoleParams) =>
-  httpClient.get<RoleListGetResultModel>({ url: Api.GetAllRoleList, params });
+  httpClientWithSolvedResponse.get<RoleListGetResultModel>({ url: Api.GetAllRoleList, params });
 
 export const setRoleStatus = (id: number, status: string) =>
-  httpClient.post({ url: Api.setRoleStatus, params: { id, status } });
+  httpClientWithSolvedResponse.post({ url: Api.setRoleStatus, params: { id, status } });
 
 export const isAccountExist = (account: string) =>
-  httpClient.post({ url: Api.IsAccountExist, params: { account } }, { errorMessageMode: 'none' });
+  httpClientWithSolvedResponse.post(
+    { url: Api.IsAccountExist, params: { account } },
+    { errorMessageMode: 'none' },
+  );

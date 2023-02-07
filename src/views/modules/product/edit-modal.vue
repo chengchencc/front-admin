@@ -30,6 +30,7 @@
       });
 
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
+        console.log('userModalInner');
         resetFields();
         setModalProps({ confirmLoading: false });
         isUpdate.value = !!data?.isUpdate;
@@ -40,6 +41,9 @@
           setFieldsValue({
             ...data.record,
           });
+        } else {
+          rowId.value = '';
+          recordData = {};
         }
 
         // const treeData = await getDeptList();

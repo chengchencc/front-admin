@@ -70,6 +70,8 @@ export function checkStatus(
     default:
   }
 
+  errMessage = msg || errMessage;
+
   if (errMessage) {
     if (errorMessageMode === 'modal') {
       createErrorModal({ title: t('sys.api.errorTip'), content: errMessage });

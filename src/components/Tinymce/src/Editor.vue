@@ -253,6 +253,8 @@
           val !== editor.getContent({ format: attrs.outputFormat })
         ) {
           editor.setContent(val);
+        } else {
+          editor.setContent(''); //修复表单重置还是原来信息问题
         }
       }
 

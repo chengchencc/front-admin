@@ -95,6 +95,7 @@
       async function handleDelete(record: Recordable) {
         console.log(record);
         await api.del(record.id);
+        reload();
       }
 
       function handleSuccess({ isUpdate, values }) {

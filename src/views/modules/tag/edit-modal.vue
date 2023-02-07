@@ -7,7 +7,7 @@
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema,api } from './data';
+  import { formSchema, api } from './data';
 
   export default defineComponent({
     name: 'EditModal',
@@ -16,6 +16,7 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const rowId = ref('');
+      let record = {};
 
       const [registerForm, { setFieldsValue, /* updateSchema,  */ resetFields, validate }] =
         useForm({
@@ -34,6 +35,8 @@
 
         if (unref(isUpdate)) {
           rowId.value = data.record.id;
+          record = unref(data.record);
+
           setFieldsValue({
             ...data.record,
           });
@@ -55,11 +58,16 @@
       const getTitle = computed(() => (!unref(isUpdate) ? '新增字典项' : '编辑字典项'));
 
       async function handleSubmit() {
+        console.log(record);
+
         try {
           let values = await validate();
           setModalProps({ confirmLoading: true });
 
           if (isUpdate.value) {
+            console.log('record', record);
+            console.log('record解构', { ...record });
+            values = { ...record, ...values };
             values = await api.update(values);
           } else {
             values = await api.insert(values);

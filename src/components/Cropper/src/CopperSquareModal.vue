@@ -2,10 +2,11 @@
   <BasicModal
     v-bind="$attrs"
     @register="register"
-    :title="t('component.cropper.modalTitle')"
+    :title="'图片上传'"
     width="800px"
     :canFullscreen="false"
     @ok="handleOk"
+    @cancel="handleReset"
     :okText="t('component.cropper.okText')"
   >
     <div :class="prefixCls">
@@ -146,7 +147,10 @@
       let scaleY = 1;
 
       const { prefixCls } = useDesign('cropper-am');
-      const [register, { closeModal, setModalProps }] = useModalInner();
+      const [register, { closeModal, setModalProps }] = useModalInner(async () => {
+        console.log('user modal inner!!');
+        handleReset();
+      });
       const { t } = useI18n();
 
       // Block upload
@@ -180,6 +184,12 @@
         cropper?.value?.[event]?.(arg);
       }
 
+      function handleReset() {
+        src.value = '';
+        previewSource.value = '';
+        filename = '';
+      }
+
       async function handleOk() {
         const uploadApi = props.uploadApi;
         if (uploadApi && isFunction(uploadApi)) {
@@ -188,6 +198,7 @@
             setModalProps({ confirmLoading: true });
             const result = await uploadApi({ name: 'file', file: blob, filename });
             emit('uploadSuccess', { source: previewSource.value, data: result.data });
+            handleReset();
             closeModal();
           } finally {
             setModalProps({ confirmLoading: false });
@@ -206,6 +217,7 @@
         handleReady,
         handlerToolbar,
         handleOk,
+        handleReset,
       };
     },
   });

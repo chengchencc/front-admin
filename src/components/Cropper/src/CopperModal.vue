@@ -2,7 +2,7 @@
   <BasicModal
     v-bind="$attrs"
     @register="register"
-    :title="t('component.cropper.modalTitle')"
+    :title="'图片上传'"
     width="800px"
     :canFullscreen="false"
     @ok="handleOk"
@@ -145,7 +145,12 @@
       let scaleY = 1;
 
       const { prefixCls } = useDesign('cropper-am');
-      const [register, { closeModal, setModalProps }] = useModalInner();
+      const [register, { closeModal, setModalProps }] = useModalInner(async () => {
+        console.log('user modal inner!!');
+        src.value = '';
+        previewSource.value = '';
+        filename = '';
+      });
       const { t } = useI18n();
 
       // Block upload

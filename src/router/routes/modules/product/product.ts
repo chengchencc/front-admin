@@ -30,14 +30,6 @@ const chengch: AppRouteModule = {
         title: '分类管理',
       },
     },
-    {
-      path: 'dict',
-      name: 'dict',
-      component: () => import('/@/views/modules/dict/index.vue'),
-      meta: {
-        title: '字典管理',
-      },
-    },
   ],
 };
 
