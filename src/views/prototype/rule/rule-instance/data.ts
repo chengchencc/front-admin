@@ -67,7 +67,7 @@ export const api = {
   // update: (data: any) => httpClient.put<any>({ url: `/tag`, data }),
   // del: (id: any) => httpClient.delete<any>({ url: `/tag/${id}` }),
 };
-export const listName = '退费处理清单';
+export const listName = '规则实例清单';
 
 const type = [
   { label: '已放款业务，修改担保费率退费', value: '0' },
