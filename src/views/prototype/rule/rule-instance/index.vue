@@ -56,6 +56,7 @@
   import ViewModal from './view-modal.vue';
 
   import { columns, listName, searchFormSchema, data } from './data';
+  import { buildUUID } from '/@/utils/uuid';
   // import { useGo } from '/@/hooks/web/usePage';
 
   export default defineComponent({
@@ -130,16 +131,22 @@
 
       function handleSuccess({ isUpdate, values }) {
         // values.id = i++;
+        values.id = buildUUID();
+
+        console.log('aaaaaa', values);
+
+        dataSource.push(values);
+
         // insertTableDataRecord(values);
-        dataSource.push({
-          id: i++,
-          name1: '济南市',
-          name2: '历城区',
-          code3: '普通项目',
-          code4: '张三',
-          code5: '372330000011241115',
-          ...values,
-        });
+        // dataSource.push({
+        //   id: i++,
+        //   name1: '济南市',
+        //   name2: '历城区',
+        //   code3: '普通项目',
+        //   code4: '张三',
+        //   code5: '372330000011241115',
+        //   ...values,
+        // });
         // if (isUpdate) {
         //   // 演示不刷新表格直接更新内部数据。
         //   // 注意：updateTableDataRecord要求表格的rowKey属性为string并且存在于每一行的record的keys中

@@ -15,7 +15,7 @@
             //   onClick: handleView.bind(null, record),
             // },
             {
-              label: '编辑',
+              // label: '',
               icon: 'clarity:note-edit-line',
               tooltip: '编辑',
               onClick: handleEdit.bind(null, record),

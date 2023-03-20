@@ -11,10 +11,10 @@ export const originData = [
   {
     id: '1',
     code: 'RI-01',
-    ruleType: '0',
+    ruleType: '1',
     name: '主债权金额小于300万',
     description: '主债权金额小于300万',
-    ruleTemplate: 'RT-01',
+    ruleTemplate: 'RT-08',
   },
   {
     id: '2',
@@ -22,39 +22,39 @@ export const originData = [
     ruleType: '0',
     name: '担保费率小于1%',
     description: '担保费率小于1%',
-    ruleTemplate: 'RT-02',
+    ruleTemplate: 'RT-04',
   },
   {
     id: '3',
     code: 'RI-03',
-    ruleType: '0',
+    ruleType: '1',
     name: '债权人为工商银行',
     description: '债权人为工商银行',
-    ruleTemplate: 'RT-03',
+    ruleTemplate: 'RT-07',
   },
   {
     id: '4',
     code: 'RI-04',
-    ruleType: '0',
+    ruleType: '1',
     name: '主债权期限小于2年',
     description: '主债权期限小于2年',
-    ruleTemplate: 'RT-04',
+    ruleTemplate: 'RT-08',
   },
   {
     id: '5',
-    code: 'RI-04',
-    ruleType: '0',
-    name: '债务人为个体工商户',
-    description: '债务人为个体工商户',
-    ruleTemplate: 'RT-04',
+    code: 'RI-05',
+    ruleType: '1',
+    name: '债权人为工商银行',
+    description: '债权人为工商银行',
+    ruleTemplate: 'RT-07',
   },
   {
     id: '6',
-    code: 'RI-04',
-    ruleType: '0',
+    code: 'RI-06',
+    ruleType: '1',
     name: '服务对象为创业创新',
     description: '服务对象为创业创新',
-    ruleTemplate: 'RT-04',
+    ruleTemplate: 'RT-06',
   },
 ];
 
@@ -191,12 +191,32 @@ export const formSchema: FormSchema[] = [
     label: '主债权金额范围',
     field: 'amountMin',
     component: 'InputGroup',
-    required: true,
+    required: false,
     show: ({ values }) => {
       console.log('values::', values);
-      return values.ruleTemplate == 'RT-04';
+      return values.ruleTemplate == 'RT-08';
     },
     slot: 'fac',
+  },
+  {
+    label: '债权人类型',
+    field: 'debtorType',
+    component: 'Select',
+    required: false,
+    componentProps: {
+      mode: 'multiple',
+      options: [
+        { label: '工商银行', value: '001' },
+        { label: '建设银行', value: '002' },
+        { label: '农业银行', value: '003' },
+        { label: '中国银行', value: '004' },
+        { label: '平安银行', value: '005' },
+      ],
+    },
+    show: ({ values }) => {
+      console.log('values::', values);
+      return values.ruleTemplate == 'RT-07';
+    },
   },
 ];
 
@@ -234,7 +254,7 @@ export const detailSchema: DescItem[] = [
     field: 'amountMin',
     show: (data) => {
       console.log('values::', data);
-      return data.ruleTemplate == 'RT-04';
+      return data.ruleTemplate == 'RT-08';
     },
   },
 

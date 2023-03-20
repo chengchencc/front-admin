@@ -25,8 +25,8 @@ const ruleManagement: AppRouteModule = {
       },
     },
     {
-      path: 'orgRules',
-      name: 'orgRules',
+      path: 'orgInstance',
+      name: 'orgInstance',
       component: () => import('/@/views/prototype/rule/rule-instance/index.vue'),
       meta: {
         title: '机构规则配置',

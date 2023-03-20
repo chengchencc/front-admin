@@ -1,20 +1,33 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
+  <BasicModal
+    v-bind="$attrs"
+    @register="registerModal"
+    :title="getTitle"
+    @ok="handleSubmit"
+    :minHeight="500"
+  >
     <BasicForm @register="registerForm">
       <!-- <div>
         规则配置： -->
       <template #fac="{ model, field }">
         <a-input-group compact>
           <!-- <a-select v-model:value="model['pay']" class="pay-select">
-              <a-select-option value="zfb"> 支付宝 </a-select-option>
-              <a-select-option value="yl"> 银联 </a-select-option>
-            </a-select> -->
-          <!-- <a-input class="pay-input" v-model:value="model[field]" /> -->
-
+            <a-select-option value="zfb"> 支付宝 </a-select-option>
+            <a-select-option value="yl"> 银联 </a-select-option>
+          </a-select>
+          <a-input class="pay-input" v-model:value="model[field]" /> -->
+          <!-- <a-select style="width: 120px">
+            <a-select-option value="01">范围</a-select-option>
+            <a-select-option value="02">小于</a-select-option>
+            <a-select-option value="03">大于</a-select-option>
+            <a-select-option value="04">小于等于</a-select-option>
+            <a-select-option value="05">大于等于</a-select-option>
+          </a-select> -->
           <a-input
             v-model:value="model['amountMin']"
-            style="width: 100px; text-align: center"
+            style="width: 150px; text-align: center"
             placeholder="最小值"
+            suffix="万元"
           />
           <a-input
             style="width: 30px; border-left: 0; pointer-events: none; background-color: #fff"
@@ -23,8 +36,9 @@
           />
           <a-input
             v-model:value="model['amountMax']"
-            style="width: 100px; text-align: center; border-left: 0"
+            style="width: 150px; text-align: center; border-left: 0"
             placeholder="最大值"
+            suffix="万元"
           />
         </a-input-group>
       </template>

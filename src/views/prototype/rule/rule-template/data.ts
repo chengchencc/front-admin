@@ -28,16 +28,51 @@ export const originData = [
   {
     id: '3',
     code: 'RT-03',
-    ruleType: '2',
+    ruleType: '0',
     name: '法定代表人姓名校验',
     description: `如债务人类别为企业时，法定代表人必须填写天眼查登记的法定代表人`,
   },
   {
     id: '4',
     code: 'RT-04',
-    ruleType: '0',
-    name: '贷款利率（年）校验',
-    description: '0%≦贷款利率≦10%',
+    ruleType: '1',
+    name: '担保费率（年）校验',
+    description: '可配置为 0%≦担保费率≦10% 类型校验',
+  },
+  {
+    id: '5',
+    code: 'RT-05',
+    ruleType: '3',
+    name: '额度校验',
+    description: '自动利用额度规则进行校验',
+  },
+  {
+    id: '6',
+    code: 'RT-06',
+    ruleType: '1',
+    name: '债务人类型校验',
+    description: '可配置债务人类型范围，例如债务人类型为创业创新企业',
+  },
+  {
+    id: '7',
+    code: 'RT-07',
+    ruleType: '1',
+    name: '债权人类型校验',
+    description: '可配置债权人类型范围，例如债权人为工商银行或建设银行',
+  },
+  {
+    id: '8',
+    code: 'RT-08',
+    ruleType: '1',
+    name: '主债权金额校验',
+    description: '可配置主债权金额范围，例如 30万<主债权金额<100万',
+  },
+  {
+    id: '8',
+    code: 'RT-08',
+    ruleType: '1',
+    name: '主债权期限校验',
+    description: '可配置主债权期限范围，例如 主债权期限<3年',
   },
 ];
 
@@ -61,8 +96,8 @@ const type = [
 const RuleType = [
   { label: '物理校验', value: '0' },
   { label: '合规性校验', value: '1' },
-  { label: '三方数据校验', value: '1' },
-  { label: '额度校验', value: '1' },
+  { label: '三方数据校验', value: '2' },
+  { label: '额度校验', value: '3' },
 ];
 
 /**
