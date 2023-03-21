@@ -5,7 +5,9 @@
     content=" 通过这个功能可以将自动备案所进行的各类校验规则进行统一编排。"
     contentClass="p-4"
   >
-    <div class="step-form-form">
+    <RuleTree>aaa</RuleTree>
+
+    <!-- <div class="step-form-form">
       <a-steps :current="current">
         <a-step title="配置数据录入校验规则" />
         <a-step title="配置合规性校验规则" />
@@ -23,7 +25,7 @@
       />
       <Step3 v-show="current === 2" @prev="handleStepPrev" @next="handleStep2Next" />
       <Step4 v-show="current === 3" @redo="handleRedo" v-if="initSetp3" />
-    </div>
+    </div> -->
   </PageWrapper>
 </template>
 <script lang="ts">
@@ -35,9 +37,12 @@
   import { PageWrapper } from '/@/components/Page';
   import { Steps } from 'ant-design-vue';
 
+  import { RuleTree } from '/@/components/RuleTree';
+
   export default defineComponent({
     name: 'FormStepPage',
     components: {
+      RuleTree,
       Step1,
       Step2,
       Step3,
