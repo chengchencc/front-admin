@@ -13,12 +13,14 @@
         </template>
       </BasicForm> -->
 
-      <BasicTable @register="registerTreeTable">
+      <!-- <BasicTable @register="registerTreeTable">
         <template #toolbar>
           <a-button type="primary" @click="expandAll">展开全部</a-button>
           <a-button type="primary" @click="collapseAll">折叠全部</a-button>
         </template>
-      </BasicTable>
+      </BasicTable> -->
+
+      <RuleTree :nodes="treeData" :name="'name'">aaa</RuleTree>
     </div>
     <a-divider />
     <h3>说明</h3>
@@ -30,15 +32,21 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
+
   import { BasicTable, useTable } from '/@/components/Table';
 
   import { step1Schemas, getBasicColumns, getTreeTableData } from './data';
 
   import { Select, Input, Divider } from 'ant-design-vue';
 
+  import { RuleTree } from '/@/components/RuleTree';
+
+  import { ruleTreeData } from './data.ts';
+
   export default defineComponent({
     components: {
+      RuleTree,
       BasicTable,
       [Select.name]: Select,
       [Input.name]: Input,
@@ -69,6 +77,8 @@
 
       // tree table
 
+      const treeData = ref(ruleTreeData);
+
       const [registerTreeTable, { expandAll, collapseAll }] = useTable({
         title: '规则编排',
         isTreeTable: true,
@@ -90,7 +100,7 @@
         pagination: false,
       });
 
-      return { registerTreeTable, expandAll, collapseAll };
+      return { registerTreeTable, expandAll, collapseAll, treeData };
     },
   });
 </script>

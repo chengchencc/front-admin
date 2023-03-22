@@ -1,6 +1,6 @@
 <template>
   <div>{{ name }}</div>
-  <RuleTreeNode :value="nodes" />
+  <RuleTreeNode :value="nodes" style="border: 1px solid #f0f0f0" />
 </template>
 
 <script setup lang="ts">

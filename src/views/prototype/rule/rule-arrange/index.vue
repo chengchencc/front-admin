@@ -5,9 +5,7 @@
     content=" 通过这个功能可以将自动备案所进行的各类校验规则进行统一编排。"
     contentClass="p-4"
   >
-    <RuleTree :nodes="treeData" :name="'name'">aaa</RuleTree>
-
-    <!-- <div class="step-form-form">
+    <div class="step-form-form">
       <a-steps :current="current">
         <a-step title="配置数据录入校验规则" />
         <a-step title="配置合规性校验规则" />
@@ -15,6 +13,7 @@
         <a-step title="完成配置" />
       </a-steps>
     </div>
+
     <div class="mt-5">
       <Step1 @next="handleStep1Next" v-show="current === 0" />
       <Step2
@@ -25,7 +24,7 @@
       />
       <Step3 v-show="current === 2" @prev="handleStepPrev" @next="handleStep2Next" />
       <Step4 v-show="current === 3" @redo="handleRedo" v-if="initSetp3" />
-    </div> -->
+    </div>
   </PageWrapper>
 </template>
 <script lang="ts">
