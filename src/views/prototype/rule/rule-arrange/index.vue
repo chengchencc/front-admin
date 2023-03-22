@@ -5,7 +5,7 @@
     content=" 通过这个功能可以将自动备案所进行的各类校验规则进行统一编排。"
     contentClass="p-4"
   >
-    <RuleTree>aaa</RuleTree>
+    <RuleTree :nodes="treeData" :name="'name'">aaa</RuleTree>
 
     <!-- <div class="step-form-form">
       <a-steps :current="current">
@@ -39,6 +39,8 @@
 
   import { RuleTree } from '/@/components/RuleTree';
 
+  import { ruleTreeData } from './data.ts';
+
   export default defineComponent({
     name: 'FormStepPage',
     components: {
@@ -53,6 +55,8 @@
     },
     setup() {
       const current = ref(0);
+
+      const treeData = ref(ruleTreeData);
 
       const state = reactive({
         initSetp2: false,
@@ -82,6 +86,7 @@
       }
 
       return {
+        treeData,
         current,
         handleStep1Next,
         handleStep2Next,

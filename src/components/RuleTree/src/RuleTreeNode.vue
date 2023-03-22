@@ -15,9 +15,9 @@
       <!-- 操作符 -->
       <div class="rule-tree-node-icon" v-if="item.nodeType === 'operation'">
         <a-input-group compact>
-          <a-button type="primary" style="padding: 4px; border-radius: 5px 0 0 5px">
-            <!-- <Icon icon="ion:layers-outline" :size="22" /> -->
-            <apartment-outlined class="oper-rule-icon" />
+          <a-button type="primary" style="padding: 5px">
+            <Icon class="oper-rule-icon" icon="ic:round-rule" :size="22" />
+            <!-- <apartment-outlined class="oper-rule-icon" /> -->
           </a-button>
           <span class="rule-tree-node-opName">
             {{ item.name }}
@@ -31,8 +31,13 @@
       </div>
       <div class="rule-tree-op-box" v-if="item.nodeType === 'operation'"></div>
       <div class="rule-tree-node-name" v-if="item.nodeType === 'ruleGroup'">
-        <span class="com-rule-icon rule-group-icon"><appstore-add-outlined /></span>
-        {{ item.name }}
+        <a-tooltip :title="item.desc || item.name">
+          <span class="com-rule-icon rule-group-icon">
+            <Icon class="oper-rule-icon" icon="ic:outline-rule-folder" :size="22" />
+          </span>
+          <span style="padding: 0 10px">{{ item.name }}</span>
+        </a-tooltip>
+        <!-- <div class="rule-line"></div> -->
       </div>
       <div class="rule-tree-node-rulename" v-if="item.nodeType === 'rule'">
         <div>
@@ -45,10 +50,14 @@
         :class="item.nodeType === 'ruleGroup' && 'rule-tree-node-children'"
         :value="item.children"
       />
+      <a-button class="group-delete" shape="circle" danger type="primary">
+        <delete-outlined />
+      </a-button>
     </div>
+    <!-- 规则包添加组件 -->
     <div v-if="value && value[0].nodeType === 'ruleGroup'">
       <a-input-group compact>
-        <a-button type="default" style="padding: 4px 8px; margin-left: 20px">
+        <a-button type="default" style="padding: 4px 8px; margin-left: 10px">
           <plus-square-outlined style="color: #aaa" />
         </a-button>
         <a-select style="width: 300px">
@@ -57,12 +66,14 @@
         </a-select>
       </a-input-group>
     </div>
-    <div v-if="value && value[0].nodeType === 'rule'">rule add</div>
+    <!-- <div v-if="value && value[0].nodeType === 'rule'">rule add</div> -->
     <!-- <div  v-if="value && value[0].nodeType === 'operation'">外层add</div> -->
   </div>
 </template>
 <script setup lang="ts">
-  import { HolderOutlined, ApartmentOutlined, AppstoreAddOutlined, PlusSquareOutlined } from '@ant-design/icons-vue';
+  import { HolderOutlined, DeleteOutlined, PlusSquareOutlined } from '@ant-design/icons-vue';
+  import { Tooltip as ATooltip } from 'ant-design-vue';
+
   import { Select as ASelect } from 'ant-design-vue';
   import { SelectOption as ASelectOption } from 'ant-design-vue';
   import { RuleNodeSchema } from './typing';
@@ -74,6 +85,7 @@
 
   const props = defineProps<Props>();
 
+  console.log('aa');
   // 基于类型
   // const emit = defineEmits<{
   //   (e: 'change', id: number): void;
@@ -82,31 +94,43 @@
 </script>
 
 <style lang="less" scoped>
+  @op-color: #0960bd;
+  @secondary-color: #ed6f6f;
+  @item-space: 10px;
+
   .rule-tree-node {
     position: relative;
     display: flex;
     flex-direction: row;
-    margin-left: 10px;
-    border: 1px solid #666;
-    padding: 10px 20px;
+    // margin-left: 10px;
+    // border: 1px solid #666;
+    padding: @item-space;
 
     &-opName {
       width: 70px;
       padding: 4px;
-      border: 1px solid #3a9ae9;
-      border-radius: 0px 5px 5px 0;
+      border: 1px solid @op-color;
+      // border-radius: 0px 5px 5px 0;
       text-align: center;
     }
 
     &-name {
       flex: none;
       margin: auto 0;
-      padding: 4px;
-      border-radius: 3px;
-      text-align: center;
+      padding: 0px;
+      /* border-radius: 3px; */
+      /* text-align: center; */
       line-height: 30px;
-      padding: 0 10px 0 0;
-      border: 1px solid rgb(0 0 0 / 85%);
+      border: 1px solid @secondary-color;
+      &::before {
+        content: ' ';
+        width: 28px;
+        display: block;
+        position: absolute;
+        border-top: 2px solid @op-color;
+        top: calc(50% - 1px);
+        left: -18px;
+      }
     }
 
     &-rulename {
@@ -125,36 +149,50 @@
 
     &-children {
       flex: auto;
+      background-color: white;
+      margin: 0 0 0 20px;
+      border: 2px dashed @secondary-color;
+      // padding: 0 10px 0 0;
+      &::before {
+        content: ' ';
+        width: 21px;
+        /* height: 10px; */
+        display: block;
+        position: relative;
+        border-top: 2px dashed @secondary-color;
+        top: calc(50% - 1px);
+        left: -21px;
+      }
     }
   }
 
   .com-rule-icon {
     display: inline-block;
-    height: 30px;
+    height: 34px;
     margin: auto 0;
-    padding: 0 8px;
+    padding: 4px 5px 0 5px;
   }
-  
+
   .oper-rule-icon {
-    background: #0960bd;
+    // background: @op-color;
     color: #fff;
     padding: 0 4px;
   }
   .rule-group-icon {
-    background: rgb(0 0 0 / 85%);
+    background: @secondary-color;
     color: #fff;
   }
 
   .rule-tree-op-box {
     flex: none;
-    margin: auto 0;
-    position: absolute;
+    /* margin: auto 0; */
+    position: relative;
     width: 12px;
-    height: calc(100% - 30px);
-    left: 145px;
-    border: 2px solid #2a7dc9;
+    /* height: calc(100% - 30px); */
+    left: 5px;
+    border: 2px solid #0960bd;
     border-right: 0px;
-    border-radius: 8px 0 0 8px;
+    // border-radius: 8px 0 0 8px;
   }
 
   .rule-tree-node-icon {
@@ -166,25 +204,30 @@
   .oper-rule-line {
     width: 16px;
     height: 2px;
-    background: #2a7dc9;
+    background: @op-color;
     position: absolute;
     top: 15px;
   }
   .rule-tree-group {
-    border: 1px solid #eee;
-    margin: 0 0 10px 20px;
-    background: rgb(0 0 0 / 1%);
+    border: 1px solid #cacdd1;
+    margin: 0 0 @item-space @item-space;
+    // background: rgb(241 243 244);
+    background: #f1f3f44f;
+    // box-shadow: 0px 0px 8px -3px rgba(0, 0, 0, 0.45);
   }
-
-  .rule-tree-node-children {
-    margin: 0 0 0 20px;
-    border: 1px dashed #2058e6;
-    padding: 0 10px 0 0;
-  }
-
   .rule-tree-item {
     border: 0px;
     padding: 0;
-    margin: 10px 0 10px 10px;
+    margin: @item-space;
+  }
+
+  .group-delete {
+    display: none;
+  }
+  .rule-tree-node.rule-tree-group > .group-delete {
+    display: block;
+    background: #ff4d4f;
+    border-color: #ff4d4f;
+    margin: auto 0px auto 10px;
   }
 </style>
