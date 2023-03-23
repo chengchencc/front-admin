@@ -74,8 +74,8 @@ const RuleGroupType = [
   { label: '合规性校验', value: '1' },
 ];
 const InnerRuleRelation = [
-  { label: 'And（并）,规则包下的规则全部符合才能校验通过', value: '0' },
-  { label: 'Or（或），规则包下的规则任意一个通过即可校验通过', value: '1' },
+  { label: 'And（并）', value: '0' },
+  { label: 'Or（或）', value: '1' },
 ];
 
 /**
