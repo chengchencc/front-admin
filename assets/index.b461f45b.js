@@ -1,1 +1,0 @@
-import{a as o,dl as u,cB as e,aD as i}from"./index.aba13b9e.js";const l=o({name:"Authority",props:{value:{type:[Number,Array,String],default:""}},setup(n,{slots:t}){const{hasPermission:s}=u();function a(){const{value:r}=n;return r?s(r)?e(t):null:e(t)}return()=>a()}}),c=i(l);export{c as A};
