@@ -288,7 +288,7 @@
 <style lang="less" scoped>
   .step1 {
     &-form {
-      width: 450px;
+      width: 70%;
       margin: 0 auto;
     }
 
