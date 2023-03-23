@@ -125,6 +125,12 @@ export const columns: BasicColumn[] = [
     dataIndex: 'ruleCount',
     width: 120,
   },
+  {
+    title: '版本',
+    dataIndex: 'ruleCount',
+    width: 120,
+    customRender: () => 'v1.0',
+  },
   ...auditColumns,
 ];
 
