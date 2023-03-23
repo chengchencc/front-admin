@@ -1,1 +1,0 @@
-import{_ as e}from"./index.91c78518.js";import{T as n,a as t,b as o}from"./index.2f381582.js";n.TabPane=e(e({},t),{name:"ATabPane",__ANT_TAB_PANE:!0});n.TabContent=e(e({},o),{name:"ATabContent"});n.install=function(a){return a.component(n.name,n),a.component(n.TabPane.name,n.TabPane),a.component(n.TabContent.name,n.TabContent),a};
