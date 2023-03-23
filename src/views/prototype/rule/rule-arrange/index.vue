@@ -15,15 +15,10 @@
     </div>
 
     <div class="mt-5">
-      <Step1 @next="handleStep1Next" v-show="current === 0" />
-      <Step2
-        @prev="handleStepPrev"
-        @next="handleStep2Next"
-        v-show="current === 1"
-        v-if="initSetp2"
-      />
-      <Step3 v-show="current === 2" @prev="handleStepPrev" @next="handleStep2Next" />
-      <Step4 v-show="current === 3" @redo="handleRedo" v-if="initSetp3" />
+      <Step1 v-show="current === 0" @next="handleNextStep" />
+      <Step2 v-show="current === 1" @next="handleNextStep" @prev="handleStepPrev" />
+      <Step3 v-show="current === 2" @next="handleNextStep" @prev="handleStepPrev" />
+      <Step4 v-show="current === 3" @redo="handleRedo" @prev="handleStepPrev" />
     </div>
   </PageWrapper>
 </template>
@@ -67,6 +62,9 @@
         state.initSetp2 = true;
         console.log(step1Values);
       }
+      function handleNextStep() {
+        current.value++;
+      }
 
       function handleStepPrev() {
         current.value--;
@@ -87,6 +85,7 @@
       return {
         treeData,
         current,
+        handleNextStep,
         handleStep1Next,
         handleStep2Next,
         handleRedo,

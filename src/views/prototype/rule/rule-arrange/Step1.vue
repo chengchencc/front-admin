@@ -1,6 +1,10 @@
 <template>
   <div class="step1">
     <div class="step1-form">
+      <RuleTree :nodes="treeData" :name="'数据录入校验'" />
+      <div class="action">
+        <a-button type="primary" @click="nextStep">下一步</a-button>
+      </div>
       <!-- <BasicForm @register="register">
         <template #fac="{ model, field }">
           <a-input-group compact>
@@ -19,8 +23,6 @@
           <a-button type="primary" @click="collapseAll">折叠全部</a-button>
         </template>
       </BasicTable> -->
-
-      <RuleTree :nodes="treeData" :name="'name'">aaa</RuleTree>
     </div>
     <a-divider />
     <h3>说明</h3>
@@ -34,27 +36,128 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
 
-  import { BasicTable, useTable } from '/@/components/Table';
+  // import { BasicTable, useTable } from '/@/components/Table';
 
-  import { step1Schemas, getBasicColumns, getTreeTableData } from './data';
+  // import { step1Schemas, getBasicColumns, getTreeTableData } from './data';
 
-  import { Select, Input, Divider } from 'ant-design-vue';
+  import { Divider } from 'ant-design-vue';
 
-  import { RuleTree } from '/@/components/RuleTree';
+  import { RuleNodeSchema, RuleTree } from '/@/components/RuleTree';
 
-  import { ruleTreeData } from './data.ts';
+  import { ruleTreeData } from './data';
 
   export default defineComponent({
     components: {
       RuleTree,
-      BasicTable,
-      [Select.name]: Select,
-      [Input.name]: Input,
-      [Input.Group.name]: Input.Group,
       [Divider.name]: Divider,
+
+      // BasicTable,
     },
     emits: ['next'],
     setup(_, { emit }) {
+      const treeData = ref<RuleNodeSchema[]>([
+        {
+          id: 'i1',
+          name: '录入保存',
+          nodeType: 'pkg',
+          children: [
+            {
+              id: '0',
+              name: 'AND',
+              nodeType: 'operation',
+              children: [
+                {
+                  id: '0-1-1',
+                  name: '基础字段物理校验（AND）',
+                  nodeType: 'ruleGroup',
+                  desc: '备案基础字段物理校验规则包',
+                  children: [
+                    // {
+                    //   id: '0-1-2',
+                    //   name: '债务人证件号校验',
+                    //   nodeType: 'rule',
+                    //   // children: [],
+                    //   desc: '基础字段物理校验规则',
+                    // },
+                    {
+                      id: '0-1-3',
+                      name: '基础字段物理校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '基础字段物理校验规则',
+                    },
+                    {
+                      id: '0-1-3',
+                      name: '扩展字段一物理校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '扩展字段一物理校验规则',
+                    },
+                    {
+                      id: '0-1-3',
+                      name: '扩展字段二物理校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '扩展字段二物理校验规则',
+                    },
+                    {
+                      id: '0-1-3',
+                      name: '扩展字段三物理校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '扩展字段三物理校验规则',
+                    },
+                  ],
+                },
+                {
+                  id: '0-1-2',
+                  name: '额度校验规则包（AND）',
+                  nodeType: 'ruleGroup',
+                  desc: '额度校验规则包',
+                  children: [
+                    {
+                      id: '0-1-2',
+                      name: '机构额度校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '',
+                    },
+                    {
+                      id: '0-1-2',
+                      name: '产品额度校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '',
+                    },
+                    {
+                      id: '0-1-2',
+                      name: '银行额度校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '',
+                    },
+                    {
+                      id: '0-1-2',
+                      name: '总体额度校验规则',
+                      nodeType: 'rule',
+                      // children: [],
+                      desc: '',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]);
+
+      // nextStep = () => {
+      // };
+
+      function nextStep() {
+        emit('next', 1);
+      }
+
       // const [register, { validate }] = useForm({
       //   labelWidth: 100,
       //   schemas: step1Schemas,
@@ -77,30 +180,28 @@
 
       // tree table
 
-      const treeData = ref(ruleTreeData);
+      // const [registerTreeTable, { expandAll, collapseAll }] = useTable({
+      //   title: '规则编排',
+      //   isTreeTable: true,
+      //   // rowSelection: {
+      //   //   type: 'checkbox',
+      //   //   getCheckboxProps(record: Recordable) {
+      //   //     // Demo: 第一行（id为0）的选择框禁用
+      //   //     if (record.id === '0') {
+      //   //       return { disabled: true };
+      //   //     } else {
+      //   //       return { disabled: false };
+      //   //     }
+      //   //   },
+      //   // },
+      //   titleHelpMessage: '树形组件不能和序列号列同时存在',
+      //   columns: getBasicColumns(),
+      //   dataSource: getTreeTableData(),
+      //   rowKey: 'id',
+      //   pagination: false,
+      // });
 
-      const [registerTreeTable, { expandAll, collapseAll }] = useTable({
-        title: '规则编排',
-        isTreeTable: true,
-        // rowSelection: {
-        //   type: 'checkbox',
-        //   getCheckboxProps(record: Recordable) {
-        //     // Demo: 第一行（id为0）的选择框禁用
-        //     if (record.id === '0') {
-        //       return { disabled: true };
-        //     } else {
-        //       return { disabled: false };
-        //     }
-        //   },
-        // },
-        titleHelpMessage: '树形组件不能和序列号列同时存在',
-        columns: getBasicColumns(),
-        dataSource: getTreeTableData(),
-        rowKey: 'id',
-        pagination: false,
-      });
-
-      return { registerTreeTable, expandAll, collapseAll, treeData };
+      return { treeData, nextStep };
     },
   });
 </script>
@@ -128,6 +229,11 @@
 
     p {
       color: @text-color;
+    }
+    .action {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 20px;
     }
   }
 

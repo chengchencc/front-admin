@@ -3,7 +3,7 @@
     <!-- <div>this is rule tree node component !</div> -->
     <div
       :class="
-        item.nodeType === 'operation'
+        item.nodeType === 'operation' || item.nodeType === 'pkg'
           ? 'rule-tree-node'
           : item.nodeType === 'ruleGroup'
           ? 'rule-tree-node rule-tree-group'
@@ -12,8 +12,27 @@
       v-for="(item, index) in value"
       :key="index"
     >
+      <!-- 规则分组 -->
+      <div class="rule-tree-node-name type-pkg" v-if="item.nodeType === 'pkg'">
+        <a-input-group compact>
+          <a-button type="primary" style="padding: 5px">
+            <Icon class="oper-rule-icon" icon="material-symbols:step-rounded" :size="22" />
+            <!-- <apartment-outlined class="oper-rule-icon" /> -->
+          </a-button>
+          <a-tooltip :title="item.desc || item.name">
+            <span class="rule-tree-node-opName">
+              {{ item.name }}
+            </span>
+          </a-tooltip>
+          <div class="oper-rule-line"></div>
+          <!-- <a-select v-model:value="item.name" style="width: 80px" :disabled="true">
+            <ASelectOption :value="'and'">AND</ASelectOption>
+            <ASelectOption :value="'or'">OR</ASelectOption>
+          </a-select> -->
+        </a-input-group>
+      </div>
       <!-- 操作符 -->
-      <div class="rule-tree-node-icon" v-if="item.nodeType === 'operation'">
+      <div class="rule-tree-node-name type-op" v-if="item.nodeType === 'operation'">
         <a-input-group compact>
           <a-button type="primary" style="padding: 5px">
             <Icon class="oper-rule-icon" icon="ic:round-rule" :size="22" />
@@ -29,8 +48,13 @@
           </a-select> -->
         </a-input-group>
       </div>
-      <div class="rule-tree-op-box" v-if="item.nodeType === 'operation'"></div>
-      <div class="rule-tree-node-name" v-if="item.nodeType === 'ruleGroup'">
+      <!-- 括号 -->
+      <div
+        class="rule-tree-op-box"
+        v-if="item.nodeType === 'operation' || item.nodeType === 'pkg'"
+      ></div>
+      <!-- 规则包 -->
+      <div class="rule-tree-node-name type-rg" v-if="item.nodeType === 'ruleGroup'">
         <a-tooltip :title="item.desc || item.name">
           <span class="com-rule-icon rule-group-icon">
             <Icon class="oper-rule-icon" icon="ic:outline-rule-folder" :size="22" />
@@ -39,13 +63,15 @@
         </a-tooltip>
         <!-- <div class="rule-line"></div> -->
       </div>
-      <div class="rule-tree-node-rulename" v-if="item.nodeType === 'rule'">
+      <!-- 规则 -->
+      <div class="rule-tree-node-name type-r" v-if="item.nodeType === 'rule'">
         <div>
           <holder-outlined />
           <!-- <Icon icon="ion:holder-outlined" :size="22" /> -->
           {{ item.name }}
         </div>
       </div>
+      <!-- children -->
       <RuleTreeNode
         :class="item.nodeType === 'ruleGroup' && 'rule-tree-node-children'"
         :value="item.children"
@@ -102,19 +128,34 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    // margin-left: 10px;
-    // border: 1px solid #666;
     padding: @item-space;
+    width: max-content;
 
     &-opName {
-      width: 70px;
+      max-width: 150px;
+      min-width: 130px;
       padding: 4px;
       border: 1px solid @op-color;
       // border-radius: 0px 5px 5px 0;
       text-align: center;
     }
-
-    &-name {
+    &-name.type-pkg,
+    &-name.type-op {
+      flex: none;
+      padding: 10px;
+      margin: auto 0;
+      position: relative;
+    }
+    &-name.type-op::before {
+      content: ' ';
+      width: 28px;
+      display: block;
+      position: absolute;
+      border-top: 2px solid @op-color;
+      top: calc(50% - 1px);
+      left: -17px;
+    }
+    &-name.type-rg {
       flex: none;
       margin: auto 0;
       padding: 0px;
@@ -133,7 +174,7 @@
       }
     }
 
-    &-rulename {
+    &-name.type-r {
       flex: none;
       // height:30px;
       padding: 10px;
@@ -148,7 +189,7 @@
     }
 
     &-children {
-      flex: auto;
+      flex: none;
       background-color: white;
       margin: 0 0 0 20px;
       border: 2px dashed @secondary-color;
@@ -195,12 +236,6 @@
     // border-radius: 8px 0 0 8px;
   }
 
-  .rule-tree-node-icon {
-    flex: none;
-    padding: 10px;
-    margin: auto 0;
-    position: relative;
-  }
   .oper-rule-line {
     width: 16px;
     height: 2px;

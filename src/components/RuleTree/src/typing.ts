@@ -1,7 +1,7 @@
 export interface RuleNodeSchema {
   id: string;
   name: string;
-  nodeType: 'operation' | 'ruleGroup' | 'rule';
+  nodeType: 'pkg' | 'operation' | 'ruleGroup' | 'rule';
   desc?: string;
   children?: RuleNodeSchema[];
 }
